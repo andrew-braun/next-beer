@@ -1,4 +1,11 @@
 .mainFooter {
+	bottom: 0;
+	right: 0;
+	left: 0;
 	display: flex;
 	justify-content: center;
+	margin: 0;
+	padding: 1rem;
+	background: var(--dark-1);
+	color: var(--light-text);
 }

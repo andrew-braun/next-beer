@@ -1,11 +1,21 @@
 :root {
-	--light-1: hsla(199, 64%, 73%, 1);
-	--mid-1: hsla(192, 70%, 43%, 1);
-	--dark-1: hsla(200, 95%, 14%, 1);
-	--bright-1: hsla(43, 100%, 51%, 1);
-	--bright-2: hsla(32, 100%, 49%, 1);
+	--light-1: hsl(199, 64%, 93%);
+	--light-2: hsl(199, 64%, 73%);
+	--mid-1: hsl(209, 100%, 40%);
+	--dark-1: hsl(200, 94%, 10%);
+	--bright-1: hsl(43, 100%, 51%);
+	--bright-2: hsl(32, 100%, 49%);
+	--light-text: hsl(0, 0%, 96%);
+	--dark-text: hsl(240, 1%, 21%);
+
+	--shallow-border-radius: 2px;
 }
 
+*,
+:after,
+:before {
+	box-sizing: border-box;
+}
 html,
 body {
 	height: 100%;
@@ -14,11 +24,8 @@ body {
 	margin: 0;
 	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
 		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-	background: url("/static/background.png");
-	background-position: 50%;
-	background-repeat: no-repeat;
-	background-size: cover;
-	color: var(--dark-1);
+	background: var(--light-1);
+	color: var(--dark-text);
 }
 
 a {
@@ -29,3 +36,75 @@ a {
 * {
 	box-sizing: border-box;
 }
+
+/* UI Components */
+.button {
+	position: relative;
+	width: clamp(140px, 80%, 380px);
+	padding: 0.8rem;
+	border: 2px solid var(--bright-1);
+	border-radius: var(--shallow-border-radius);
+	background: transparent;
+	font-size: 1.2rem;
+	letter-spacing: 0.4rem;
+	text-transform: uppercase;
+	transition: all 200ms linear;
+	cursor: pointer;
+	user-select: none;
+	z-index: 100;
+	overflow: hidden;
+}
+
+.button:hover {
+	border-color: transparent;
+	cursor: pointer;
+}
+
+/* From Bottom */
+
+.button:before {
+	position: absolute;
+	bottom: -25px;
+	left: 0;
+	right: 0;
+	content: "";
+	width: 100%;
+	height: 100%;
+	border-width: 0 2px 2px 2px;
+	border-color: var(--dark-1);
+	border-style: solid;
+	opacity: 0;
+	transition: all 400ms cubic-bezier(0.77, 0, 0.175, 1);
+	transition-delay: 200ms;
+	z-index: 10;
+}
+
+.button:hover:before {
+	bottom: 0px;
+	opacity: 1;
+}
+
+.button:after {
+	position: absolute;
+	bottom: -50px;
+	left: 0;
+	right: 0;
+	content: "";
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(to top, var(--bright-2), whitesmoke);
+	opacity: 0;
+	transition: all 800ms cubic-bezier(0.77, 0, 0.175, 1);
+	transition-delay: 300ms;
+	z-index: -1;
+}
+
+.button:hover:after {
+	bottom: 0px;
+	opacity: 1;
+}
+
+/* BREAKPOINTS
+mobile: 640px;
+tablet: 768px;
+*/
