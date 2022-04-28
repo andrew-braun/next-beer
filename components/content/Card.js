@@ -1,10 +1,10 @@
 import Link from "next/link"
-const Card = ({ title, link }) => {
+const Card = ({ name, link }) => {
 	return (
 		<article>
 			<Link href={link}>
 				<a>
-					<h3>{title}</h3>
+					<h3>{name}</h3>
 				</a>
 			</Link>
 		</article>
