@@ -1,18 +1,18 @@
 {
-  "name": "beer-discovery",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
-  "dependencies": {
-    "next": "12.1.5",
-    "react": "18.0.0",
-    "react-dom": "18.0.0"
-  },
-  "devDependencies": {
-    "@svgr/webpack": "^6.2.1"
-  }
+	"name": "next-beer",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start"
+	},
+	"dependencies": {
+		"next": "12.1.5",
+		"react": "18.0.0",
+		"react-dom": "18.0.0"
+	},
+	"devDependencies": {
+		"@svgr/webpack": "^6.2.1"
+	}
 }
