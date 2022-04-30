@@ -7,21 +7,18 @@ import styles from "./slug.module.css"
 export default function Location({ location }) {
 	const router = useRouter()
 
+	const data = location.data[0].attributes
 	return (
 		<div className={styles.locationContainer}>
 			<Link href="/">Back to home</Link>
-			<h1>{router.query.slug}</h1>
+			<h1>{data.name}</h1>
 		</div>
 	)
 }
 
 export async function getStaticPaths() {
 	const locations = await fetchLocations([`fields[1]=slug`])
-	console.log(
-		locations.data.map((location) => {
-			return { params: { slug: location.attributes.slug } }
-		})
-	)
+
 	const pathParams = await locations.data.map((location) => {
 		return { params: { slug: location.attributes.slug } }
 	})
