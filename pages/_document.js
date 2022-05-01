@@ -9,7 +9,7 @@ class MyDocument extends Document {
 						rel="preload"
 						href="/fonts/Raleway-VariableFont_wght.woff2"
 						as="font"
-						crossorigin="anonymous"
+						crossOrigin="anonymous"
 					></link>
 				</Head>
 				<body>

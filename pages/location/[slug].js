@@ -1,12 +1,10 @@
-import { useRouter } from "next/router"
 import Link from "next/link"
+import Image from "next/image"
 import { fetchLocation } from "../../lib/strapi/location"
 import { fetchLocations } from "../../lib/strapi/locations"
 import styles from "./slug.module.css"
 
 export default function Location({ location }) {
-	const router = useRouter()
-
 	const data = location.data[0].attributes
 	return (
 		<div className={styles.locationContainer}>

@@ -8,7 +8,6 @@ import Card from "../components/content/Card"
 import CardGrid from "../components/content/CardGrid"
 
 export default function Home({ locations }) {
-	console.log(locations.data)
 	return (
 		<Fragment>
 			<Head>
@@ -19,19 +18,18 @@ export default function Home({ locations }) {
 
 			<main className={styles.main}>
 				<Banner />
-				<Card title="Tsota Tsota" link="/location/tsota-tsota" />
 				<CardGrid cards={locations.data} />
 			</main>
 		</Fragment>
 	)
 }
 
-export async function getServerSideProps(context) {
+export async function getStaticProps({ params }) {
 	const locations = await fetchLocations()
-	console.log(locations)
+
 	return {
 		props: {
 			locations,
-		}, // will be passed to the page component as props
+		},
 	}
 }
