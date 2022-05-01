@@ -8,7 +8,7 @@ const Card = ({ title, link, image }) => {
 		: image.data.attributes.url
 	console.log(featuredImage)
 	return (
-		<article className={styles.card}>
+		<article className={`${styles.card} glass`}>
 			<Link href={link}>
 				<a>
 					<div className={styles.imageWrapper}>

@@ -31,5 +31,6 @@ export async function getStaticProps({ params }) {
 		props: {
 			locations,
 		},
+		revalidate: 43200, // In seconds
 	}
 }
