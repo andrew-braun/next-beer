@@ -60,6 +60,14 @@ a {
 	box-sizing: border-box;
 }
 
+h1 {
+	font-size: 3rem;
+}
+
+p {
+	line-height: 1.5;
+}
+
 /* UI Components */
 .button {
 	position: relative;
@@ -125,6 +133,13 @@ a {
 .button:hover:after {
 	bottom: 0px;
 	opacity: 1;
+}
+
+/* General styles */
+.page-section {
+	padding: 2% 5%;
+}
+.section-heading {
 }
 
 /* Backgrounds */

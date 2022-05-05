@@ -18,7 +18,12 @@ export default function Home({ locations }) {
 
 			<main className={styles.main}>
 				<Banner />
-				<CardGrid cards={locations.data} />
+				{Object.entries(locations).length && (
+					<div className={`${styles.cardGridContainer} page-section`}>
+						<h2 className={`sectionHeading`}>Beer Locations</h2>
+						<CardGrid cards={locations.data} />
+					</div>
+				)}
 			</main>
 		</Fragment>
 	)

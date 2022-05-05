@@ -1,15 +1,40 @@
 import Link from "next/link"
+import { useRouter } from "next/router"
 import Image from "next/image"
 import { fetchLocation } from "../../lib/strapi/location"
 import { fetchLocations } from "../../lib/strapi/locations"
 import styles from "./slug.module.css"
 
 export default function Location({ location }) {
-	const data = location.data[0].attributes
+	const { name, description, featured_image } = location.data[0].attributes
+	const featuredImage = featured_image.data.attributes.formats.small
+		? featured_image.data.attributes.formats.small.url
+		: featured_image.data.attributes.url
+
+	const router = useRouter()
+	if (router.isFallback) {
+		return <div>Loading...</div>
+	}
 	return (
-		<div className={styles.locationContainer}>
-			<Link href="/">Back to home</Link>
-			<h1>{data.name}</h1>
+		<div className={styles.pageContainer}>
+			<div class={styles.contentContainer}>
+				<aside className={styles.sidebar}>
+					<h1 className={styles.name}>{name}</h1>
+					<div class={styles.imageContainer}>
+						<Image
+							src={featuredImage}
+							layout="responsive"
+							width="100%"
+							height="100%"
+						/>
+					</div>
+				</aside>
+				<div class={styles.mainContent}>
+					<div className={styles.contentText}>
+						<p>{description}</p>
+					</div>
+				</div>
+			</div>
 		</div>
 	)
 }

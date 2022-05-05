@@ -1,10 +1,14 @@
 .mainHeader {
 	margin: 0;
-	padding: 1rem;
+	padding: 1rem 4rem;
 	background: var(--dark-1);
-	font-size: 1.5rem;
+	font-size: 1.6rem;
 	color: var(--light-text);
+}
+.titleSectionOne {
+	font-weight: 500;
 }
 .titleSectionTwo {
 	color: var(--bright-1);
+	font-weight: 300;
 }
