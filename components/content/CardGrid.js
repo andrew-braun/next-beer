@@ -1,16 +1,16 @@
 import Card from "./Card"
 import styles from "./CardGrid.module.css"
 
-const CardGrid = ({ cards }) => {
-	const gridContent = cards.map((card) => {
-		const { id, attributes } = card
-		const { name, slug, featured_image } = attributes
+const CardGrid = ({ data }) => {
+	const gridContent = data.map((card) => {
+		const { fsq_id, name, link, location } = card
+		let featuredImage
 		return (
 			<Card
-				title={name}
-				link={`/location/${slug}`}
-				image={featured_image}
-				key={id}
+				name={name}
+				link={`/location${link}`}
+				image={featuredImage ?? "/static/images/beer-photo.jpg"}
+				key={fsq_id}
 			/>
 		)
 	})

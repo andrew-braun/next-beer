@@ -3,11 +3,12 @@ import Image from "next/image"
 import { Fragment } from "react"
 import styles from "../styles/Home.module.css"
 import { fetchLocations } from "../lib/strapi/locations"
+import { fetchNearbyVenues } from "../lib/foursquare/nearby-venues"
 import Banner from "../components/content/Banner"
-import Card from "../components/content/Card"
 import CardGrid from "../components/content/CardGrid"
 
-export default function Home({ locations }) {
+export default function Home({ locations, nearbyVenues }) {
+	console.log(nearbyVenues)
 	return (
 		<Fragment>
 			<Head>
@@ -21,7 +22,7 @@ export default function Home({ locations }) {
 				{Object.entries(locations).length && (
 					<div className={`${styles.cardGridContainer} page-section`}>
 						<h2 className={`sectionHeading`}>Beer Locations</h2>
-						<CardGrid cards={locations.data} />
+						<CardGrid data={nearbyVenues.results} />
 					</div>
 				)}
 			</main>
@@ -32,10 +33,12 @@ export default function Home({ locations }) {
 export async function getStaticProps({ params }) {
 	const locations = await fetchLocations()
 
+	const nearbyVenues = await fetchNearbyVenues("beer", "41.7072", "44.7748")
+
 	return {
 		props: {
 			locations,
+			nearbyVenues,
 		},
-		revalidate: 43200, // In seconds
 	}
 }

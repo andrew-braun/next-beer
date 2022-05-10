@@ -12,6 +12,12 @@
 	opacity: 0.8;
 }
 
+.cardLink {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
 .imageWrapper {
 	min-width: 200px;
 	max-width: 240px;
@@ -20,6 +26,7 @@
 }
 
 .cardTitle {
+	flex: 1 1 auto;
 	margin: 0;
 	padding: 1rem;
 	border-color: var(--color-1);
