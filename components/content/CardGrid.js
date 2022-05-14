@@ -8,7 +8,7 @@ const CardGrid = ({ data }) => {
 		return (
 			<Card
 				name={name}
-				link={`/location${link}`}
+				link={`/location/${fsq_id}`}
 				image={featuredImage ?? "/static/images/beer-photo.jpg"}
 				key={fsq_id}
 			/>
