@@ -1,5 +1,6 @@
 import { useRouter } from "next/router"
 import Image from "next/image"
+import Map from "../../components/maps/Map"
 
 import { fetchNearbyVenues } from "../../lib/foursquare/nearby-venues"
 
@@ -7,19 +8,21 @@ import styles from "./id.module.css"
 
 export default function Venue({ venue }) {
 	const { name, geocodes, location, photos } = venue
+	const { latitude, longitude } = geocodes.main
 	let imageUrl = `${photos[0].prefix}1000x1000${photos[0].suffix}`
 
 	const router = useRouter()
 	if (router.isFallback) {
 		return <div>Loading...</div>
 	}
+	console.log(venue)
 	return (
 		<div className={styles.pageContainer}>
 			<div className={styles.contentContainer}>
 				<aside className={styles.sidebar}>
 					<h1 className={styles.name}>{name}</h1>
 
-					<div class={styles.imageContainer}>
+					<div className={styles.imageContainer}>
 						<Image
 							src={imageUrl ?? "/static/images/beer-photo.jpg"}
 							layout="responsive"
@@ -37,6 +40,12 @@ export default function Venue({ venue }) {
 							<p>{location.neighborhood ?? ""}</p>
 						</div>
 					</div>
+					<Map
+						lat={latitude}
+						lng={longitude}
+						zoomLevel={12}
+						address={`${location.address}, ${location.locality}, ${location.postcode}`}
+					/>
 				</div>
 			</div>
 		</div>
