@@ -2,14 +2,15 @@ import Card from "./Card"
 import styles from "./CardGrid.module.css"
 
 const CardGrid = ({ data }) => {
-	const gridContent = data.map((card) => {
-		const { fsq_id, name, link, location } = card
-		let featuredImage
+	const gridContent = data.map((venue) => {
+		const { fsq_id, name, link, location, photos } = venue
+		let imageUrl = `${photos[0].prefix}500x500${photos[0].suffix}`
+
 		return (
 			<Card
 				name={name}
 				link={`/location/${fsq_id}`}
-				image={featuredImage ?? "/static/images/beer-photo.jpg"}
+				image={imageUrl ?? "/static/images/beer-photo.jpg"}
 				key={fsq_id}
 			/>
 		)

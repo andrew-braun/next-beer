@@ -6,9 +6,9 @@ import { fetchNearbyVenues } from "../lib/foursquare/nearby-venues"
 import { fetchVenue } from "../lib/foursquare/venue"
 import Banner from "../components/content/Banner"
 import CardGrid from "../components/content/CardGrid"
+import { fetchVenuePhotos } from "../lib/foursquare/photos"
 
-export default function Home({ venue, nearbyVenues }) {
-	console.log(venue)
+export default function Home({ nearbyVenues }) {
 	console.log(nearbyVenues)
 	return (
 		<Fragment>
@@ -23,7 +23,7 @@ export default function Home({ venue, nearbyVenues }) {
 				{Object.entries(nearbyVenues).length && (
 					<div className={`${styles.cardGridContainer} page-section`}>
 						<h2 className={`sectionHeading`}>Beer Locations</h2>
-						<CardGrid data={nearbyVenues.results} />
+						<CardGrid data={nearbyVenues} />
 					</div>
 				)}
 			</main>
@@ -32,12 +32,12 @@ export default function Home({ venue, nearbyVenues }) {
 }
 
 export async function getStaticProps({ params }) {
+	// Get list of nearby venues
 	const nearbyVenues = await fetchNearbyVenues("beer", 8, "40.6864", "-73.9791")
-	const venue = await fetchVenue("5a187743ccad6b307315e6fe")
+
 	return {
 		props: {
 			nearbyVenues,
-			venue,
 		},
 	}
 }

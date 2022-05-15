@@ -11,6 +11,6 @@ module.exports = {
 		return config
 	},
 	images: {
-		domains: ["res.cloudinary.com"],
+		domains: ["res.cloudinary.com", "fastly.4sqi.net"],
 	},
 }
