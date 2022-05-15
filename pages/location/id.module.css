@@ -39,6 +39,10 @@
 	max-width: 700px;
 }
 
+.address p {
+	margin: 0;
+}
+
 @media screen and (max-width: 1160px) {
 	.contentContainer {
 		grid-template-columns: 2fr 2fr;

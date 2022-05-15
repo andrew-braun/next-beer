@@ -32,7 +32,7 @@ export default function Home({ venue, nearbyVenues }) {
 }
 
 export async function getStaticProps({ params }) {
-	const nearbyVenues = await fetchNearbyVenues("beer", 8, "41.7072", "44.7748")
+	const nearbyVenues = await fetchNearbyVenues("beer", 8, "40.6864", "-73.9791")
 	const venue = await fetchVenue("5a187743ccad6b307315e6fe")
 	return {
 		props: {

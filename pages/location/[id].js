@@ -1,13 +1,12 @@
-import Link from "next/link"
 import { useRouter } from "next/router"
 import Image from "next/image"
-import { fetchVenue } from "../../lib/foursquare/venue"
+
 import { fetchNearbyVenues } from "../../lib/foursquare/nearby-venues"
 
 import styles from "./id.module.css"
 
 export default function Venue({ venue }) {
-	const { name } = venue
+	const { name, geocodes, location } = venue
 	console.log(venue)
 	const router = useRouter()
 	if (router.isFallback) {
@@ -30,7 +29,13 @@ export default function Venue({ venue }) {
 					*/}
 				</aside>
 				<div className={styles.mainContent}>
-					<div className={styles.contentText}>{/* <p>{description}</p> */}</div>
+					<div className={styles.contentText}>
+						<div className={styles.address}>
+							<p>
+								{location.address} - {location.locality}, {location.postcode}
+							</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -38,7 +43,7 @@ export default function Venue({ venue }) {
 }
 
 export async function getStaticPaths() {
-	const nearbyVenues = await fetchNearbyVenues("beer", 8, "41.7072", "44.7748")
+	const nearbyVenues = await fetchNearbyVenues("beer", 8, "40.6864", "-73.9791")
 
 	const pathParams = await nearbyVenues.results.map((venue) => {
 		return { params: { id: venue.fsq_id.toString() } }
@@ -53,7 +58,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
 	const id = params.id
 
-	const nearbyVenues = await fetchNearbyVenues("beer", 8, "41.7072", "44.7748")
+	const nearbyVenues = await fetchNearbyVenues("beer", 8, "40.6864", "-73.9791")
 	const venue = await nearbyVenues.results.find((venue) => venue.fsq_id === id)
 
 	return {
