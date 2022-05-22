@@ -1,15 +1,21 @@
 import Head from "next/head"
-import Image from "next/image"
-import { Fragment } from "react"
-import styles from "../styles/Home.module.css"
+import { Fragment, useRef } from "react"
+import useLocation from "../hooks/use-location"
+
 import { fetchNearbyVenues } from "../lib/foursquare/nearby-venues"
-import { fetchVenue } from "../lib/foursquare/venue"
+
 import Banner from "../components/content/Banner"
 import CardGrid from "../components/content/CardGrid"
-import { fetchVenuePhotos } from "../lib/foursquare/photos"
+import LocationButton from "../components/ui/LocationButton"
+
+import styles from "./Home.module.css"
 
 export default function Home({ nearbyVenues }) {
-	console.log(nearbyVenues)
+	const { handleFindLocation, latLon, locationErrorMsg, isLoading } =
+		useLocation()
+	console.log({ latLon, locationErrorMsg })
+
+	const cardGridRef = useRef()
 	return (
 		<Fragment>
 			<Head>
@@ -19,10 +25,18 @@ export default function Home({ nearbyVenues }) {
 			</Head>
 
 			<main className={styles.main}>
-				<Banner />
+				<Banner cardGridRef={cardGridRef} />
 				{Object.entries(nearbyVenues).length && (
-					<div className={`${styles.cardGridContainer} page-section`}>
-						<h2 className={`sectionHeading`}>Beer Locations</h2>
+					<div
+						className={`${styles.cardGridContainer} page-section}`}
+						id="card-grid"
+						ref={cardGridRef}
+					>
+						<LocationButton
+							text="Find Beer Near You"
+							onClick={handleFindLocation}
+							isLoading={isLoading}
+						/>
 						<CardGrid data={nearbyVenues} />
 					</div>
 				)}

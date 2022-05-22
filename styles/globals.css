@@ -38,6 +38,7 @@
 :after,
 :before {
 	box-sizing: border-box;
+	scroll-behavior: smooth;
 }
 html,
 body {
@@ -133,6 +134,26 @@ p {
 .button:hover:after {
 	bottom: 0px;
 	opacity: 1;
+}
+
+.loadingButton {
+	animation: loadingBar 3s linear infinite;
+	overflow: hidden;
+	background: linear-gradient(to right, var(--bright-2) 0%, transparent 80%);
+	background-size: 200%;
+	background-position: 0%, 0%;
+}
+
+@keyframes loadingBar {
+	0% {
+		background-position: 100%, 100%;
+	}
+	50% {
+		background-position: 0%, 0%;
+	}
+	100% {
+		background-position: 100%, 100%;
+	}
 }
 
 /* General styles */

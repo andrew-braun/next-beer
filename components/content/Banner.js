@@ -1,8 +1,13 @@
+import useLocation from "../../hooks/use-location"
 import PouringBeer from "../../public/static/images/pouring-beer.svg"
 import styles from "./Banner.module.css"
-const Banner = (props) => {
-	const clickHandler = (event) => {
-		console.log(event)
+import LocationButton from "../ui/LocationButton"
+const Banner = ({ cardGridRef }) => {
+	const { handleFindLocation, latLon, locationErrorMsg, isLoading } =
+		useLocation()
+	const handleButtonClick = (event) => {
+		handleFindLocation(event)
+		cardGridRef.current.scrollIntoView()
 	}
 
 	return (
@@ -27,9 +32,11 @@ const Banner = (props) => {
 
 					<p className={styles.subtitle}>Find the best brews near you!</p>
 				</div>
-				<button className={`button`} onClick={clickHandler}>
-					Find Beer
-				</button>
+				<LocationButton
+					text="Find Beer Near You"
+					onClick={handleButtonClick}
+					isLoading={isLoading}
+				/>
 			</div>
 		</div>
 	)

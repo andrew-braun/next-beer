@@ -36,8 +36,18 @@
 
 .title {
 	margin: 0.5em 0;
+	text-align: center;
 }
 
 .subtitle {
 	margin: 0 0 1em 0;
+}
+
+.bannerButton {
+	text-align: center;
+}
+@media screen and (max-width: 802px) {
+	.bannerButton {
+		display: none;
+	}
 }
