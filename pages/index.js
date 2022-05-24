@@ -24,7 +24,7 @@ export default function Home({ defaultVenues }) {
 					8,
 					latLon.lat.toFixed(4),
 					latLon.lon.toFixed(4),
-					false
+					true
 				)
 				setCurrentVenues(response)
 			} catch (error) {

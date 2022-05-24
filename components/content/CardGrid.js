@@ -5,9 +5,10 @@ const CardGrid = ({ data }) => {
 	const gridContent = data.map((venue) => {
 		const { fsq_id, name, link, location } = venue
 
-		let imageUrl = venue.photos
-			? `${venue.photos[0].prefix}500x500${venue.photos[0].suffix}`
-			: null
+		let imageUrl =
+			venue.photos && venue.photos[0]
+				? `${venue.photos[0].prefix}500x500${venue.photos[0].suffix}`
+				: null
 
 		return (
 			<Card
