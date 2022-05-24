@@ -36,6 +36,8 @@ const Banner = ({ cardGridRef }) => {
 					text="Find Beer Near You"
 					onClick={handleButtonClick}
 					isLoading={isLoading}
+					classes={styles.bannerButton}
+					error={locationErrorMsg}
 				/>
 			</div>
 		</div>

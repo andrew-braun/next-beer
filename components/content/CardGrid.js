@@ -3,8 +3,11 @@ import styles from "./CardGrid.module.css"
 
 const CardGrid = ({ data }) => {
 	const gridContent = data.map((venue) => {
-		const { fsq_id, name, link, location, photos } = venue
-		let imageUrl = `${photos[0].prefix}500x500${photos[0].suffix}`
+		const { fsq_id, name, link, location } = venue
+
+		let imageUrl = venue.photos
+			? `${venue.photos[0].prefix}500x500${venue.photos[0].suffix}`
+			: null
 
 		return (
 			<Card

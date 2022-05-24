@@ -1,20 +1,33 @@
 import { useState, useEffect } from "react"
 import styles from "./LocationButton.module.css"
 
-export default function LocationButton({ text, onClick, isLoading }) {
+export default function LocationButton({
+	text,
+	onClick,
+	classes,
+	isLoading,
+	error,
+}) {
 	const [buttonText, setButtonText] = useState()
-	let classes = isLoading
-		? `button ${styles.locationButton} loadingButton`
-		: `button ${styles.locationButton}`
+
+	let appliedClasses = isLoading
+		? `button ${styles.locationButton} ${classes} loadingButton`
+		: `button ${styles.locationButton} ${classes}`
 
 	useEffect(() => {
-		console.log(isLoading)
 		isLoading ? setButtonText("Locating...") : setButtonText(text)
 	}, [isLoading, buttonText])
 
 	return (
-		<button className={classes} onClick={onClick}>
-			{buttonText}
-		</button>
+		<>
+			<button className={appliedClasses} onClick={onClick}>
+				{buttonText}
+			</button>
+			{error && (
+				<p className={styles.errorMessage}>
+					{error}. Please allow location permissions in your browser.
+				</p>
+			)}
+		</>
 	)
 }

@@ -1,2 +1,8 @@
 .locationButton {
+	text-align: center;
+}
+.errorMessage {
+	max-width: 400px;
+	padding: 1rem;
+	margin: 0 auto;
 }
