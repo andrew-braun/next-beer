@@ -7,6 +7,14 @@ import { fetchNearbyVenues } from "../../lib/foursquare/nearby-venues"
 import styles from "./id.module.css"
 
 export default function Venue({ venue }) {
+	if (!venue) {
+		return (
+			<div className={`${styles.errorMessage}`}>
+				<p>Oh no! Something went wrong when loading this venue</p>
+			</div>
+		)
+	}
+
 	const { name, geocodes, location, photos } = venue
 	const { latitude, longitude } = geocodes.main
 	let imageUrl = `${photos[0].prefix}1000x1000${photos[0].suffix}`
@@ -79,7 +87,7 @@ export async function getStaticProps({ params }) {
 
 	return {
 		props: {
-			venue,
+			venue: venue ? venue : {},
 		},
 	}
 }
