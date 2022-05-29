@@ -5,18 +5,22 @@ export default function LocationButton({
 	text,
 	onClick,
 	classes,
-	isLoading,
+	isLocationLoading,
+	isDataLoading,
 	error,
 }) {
 	const [buttonText, setButtonText] = useState()
 
-	let appliedClasses = isLoading
-		? `button ${styles.locationButton} ${classes} loadingButton`
-		: `button ${styles.locationButton} ${classes}`
+	let appliedClasses =
+		isLocationLoading || isDataLoading
+			? `button ${styles.locationButton} ${classes} loadingButton`
+			: `button ${styles.locationButton} ${classes}`
 
 	useEffect(() => {
-		isLoading ? setButtonText("Locating...") : setButtonText(text)
-	}, [isLoading, buttonText])
+		isLocationLoading || isDataLoading
+			? setButtonText("Locating...")
+			: setButtonText(text)
+	}, [isLocationLoading, buttonText, isDataLoading])
 
 	return (
 		<>

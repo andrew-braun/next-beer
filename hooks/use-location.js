@@ -1,9 +1,12 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
+import { ACTION_TYPES, VenueContext } from "../pages/_app"
 
 const useLocation = () => {
 	const [locationErrorMsg, setLocationErrorMsg] = useState("")
 	const [latLon, setLatLon] = useState({})
 	const [isLoading, setIsLoading] = useState(false)
+
+	const { dispatch } = useContext(VenueContext)
 
 	const success = (position) => {
 		const lat = position.coords.latitude
@@ -11,6 +14,8 @@ const useLocation = () => {
 		setLatLon({ lat, lon })
 		setLocationErrorMsg("")
 		setIsLoading(false)
+
+		dispatch({ type: ACTION_TYPES.SET_LAT_LON, payload: { lat, lon } })
 	}
 	const error = () => {
 		setLocationErrorMsg("Unable to retrieve location")

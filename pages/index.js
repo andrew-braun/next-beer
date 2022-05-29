@@ -13,6 +13,7 @@ import styles from "./Home.module.css"
 export default function Home({ defaultVenues }) {
 	const { handleFindLocation, latLon, locationErrorMsg, isLoading } =
 		useLocation()
+	const [isDataLoading, setIsDataLoading] = useState(false)
 	const [currentVenues, setCurrentVenues] = useState(defaultVenues)
 	const [fetchError, setFetchError] = useState("")
 
@@ -29,12 +30,14 @@ export default function Home({ defaultVenues }) {
 					true
 				)
 				setCurrentVenues(response)
+				setIsDataLoading(false)
 			} catch (error) {
 				setFetchError(error.message)
 			}
 		}
 		// Check that latLon isn't empty
 		if (latLon.hasOwnProperty("lat")) {
+			setIsDataLoading(true)
 			fetchData()
 		}
 	}, [latLon])
@@ -62,7 +65,8 @@ export default function Home({ defaultVenues }) {
 						<LocationButton
 							text="Find Beer Near You"
 							onClick={handleFindLocation}
-							isLoading={isLoading}
+							isLocationLoading={isLoading}
+							isDataLoading={isDataLoading}
 							error={locationErrorMsg}
 						/>
 
