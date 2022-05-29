@@ -15,7 +15,7 @@ export default function Venue({ venue }) {
 	if (router.isFallback) {
 		return <div>Loading...</div>
 	}
-	console.log(venue)
+
 	return (
 		<div className={styles.pageContainer}>
 			<div className={styles.contentContainer}>

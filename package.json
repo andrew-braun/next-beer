@@ -14,7 +14,7 @@
 		"react-dom": "18.0.0"
 	},
 	"devDependencies": {
-		"@iconify/react": "^3.2.1",
+		"@iconify/react": "^3.2.2",
 		"@svgr/webpack": "^6.2.1"
 	}
 }

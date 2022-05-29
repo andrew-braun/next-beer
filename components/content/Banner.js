@@ -7,7 +7,7 @@ const Banner = ({ cardGridRef }) => {
 		useLocation()
 	const handleButtonClick = (event) => {
 		handleFindLocation(event)
-		cardGridRef.current.scrollIntoView()
+		cardGridRef.current ? cardGridRef.current.scrollIntoView() : ""
 	}
 
 	return (

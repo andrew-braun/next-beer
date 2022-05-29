@@ -13,12 +13,14 @@ import styles from "./Home.module.css"
 export default function Home({ defaultVenues }) {
 	const { handleFindLocation, latLon, locationErrorMsg, isLoading } =
 		useLocation()
-	const [currentVenues, setCurrentVenues] = useState({})
+	const [currentVenues, setCurrentVenues] = useState(defaultVenues)
+	const [fetchError, setFetchError] = useState("")
 
 	// Update coffee store list when location changes
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
+				setFetchError("")
 				const response = await fetchNearbyVenues(
 					"beer",
 					8,
@@ -28,14 +30,13 @@ export default function Home({ defaultVenues }) {
 				)
 				setCurrentVenues(response)
 			} catch (error) {
-				console.log(error)
+				setFetchError(error.message)
 			}
 		}
 		// Check that latLon isn't empty
 		if (latLon.hasOwnProperty("lat")) {
 			fetchData()
 		}
-		console.log(currentVenues)
 	}, [latLon])
 
 	// Establish a reference to the card grid section so the banner button can scroll to it
@@ -51,7 +52,8 @@ export default function Home({ defaultVenues }) {
 
 			<main className={styles.main}>
 				<Banner cardGridRef={cardGridRef} />
-				{Object.entries(defaultVenues).length && (
+				{fetchError && <p>{fetchError}</p>}
+				{!fetchError && currentVenues && (
 					<div
 						className={`${styles.cardGridContainer} page-section}`}
 						id="card-grid"
@@ -63,6 +65,7 @@ export default function Home({ defaultVenues }) {
 							isLoading={isLoading}
 							error={locationErrorMsg}
 						/>
+
 						<CardGrid
 							data={currentVenues.length ? currentVenues : defaultVenues}
 						/>
