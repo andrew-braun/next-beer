@@ -1,6 +1,7 @@
 import Head from "next/head"
-import { Fragment, useEffect, useRef, useState } from "react"
+import { Fragment, useEffect, useRef, useState, useContext } from "react"
 import useLocation from "../hooks/use-location"
+import { ACTION_TYPES, VenueContext } from "./_app"
 
 import { fetchNearbyVenues } from "../lib/foursquare/nearby-venues"
 
@@ -17,6 +18,9 @@ export default function Home({ defaultVenues }) {
 	const [currentVenues, setCurrentVenues] = useState(defaultVenues)
 	const [fetchError, setFetchError] = useState("")
 
+	const { dispatch, state } = useContext(VenueContext)
+	const { venues } = state
+
 	// Update coffee store list when location changes
 	useEffect(() => {
 		const fetchData = async () => {
@@ -29,7 +33,15 @@ export default function Home({ defaultVenues }) {
 					latLon.lon.toFixed(4),
 					true
 				)
-				setCurrentVenues(response)
+
+				dispatch({
+					type: ACTION_TYPES.SET_VENUES,
+					payload: {
+						venues: response,
+					},
+				})
+
+				// setCurrentVenues(response)
 				setIsDataLoading(false)
 			} catch (error) {
 				setFetchError(error.message)
@@ -70,9 +82,7 @@ export default function Home({ defaultVenues }) {
 							error={locationErrorMsg}
 						/>
 
-						<CardGrid
-							data={currentVenues.length ? currentVenues : defaultVenues}
-						/>
+						<CardGrid data={venues} />
 					</div>
 				)}
 			</main>

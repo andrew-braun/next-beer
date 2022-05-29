@@ -15,7 +15,7 @@ const venueReducer = (state, action) => {
 		case ACTION_TYPES.SET_LAT_LON: {
 			return { ...state, lat: action.payload.lat, lon: action.payload.lon }
 		}
-		case ACTION_TYPES.SET_COFFEE_STORES: {
+		case ACTION_TYPES.SET_VENUES: {
 			return { ...state, venues: action.payload.venues }
 		}
 		default:
